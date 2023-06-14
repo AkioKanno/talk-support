@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script>
+    const SpeechRecognition =
+      window.webkitSpeechRecognition || window.SpeechRecognition
+    const recognition = new SpeechRecognition()
+    recognition.lang = 'ja-JP'
+
+    recognition.onresult = (event) => {
+      const textInfo = event.results[event.results.length - 1][0]
+      const message = textInfo.transcript
+      $('.result').text(message)
+    }
+
+    $(function() {
+      $('.start').on('click', () => {
+        console.log('hogehoge')
+        recognition.start()
+      })
+    })
+  </script>
+</head>
+<body>
+    <h1>Hello Wolrd</h1>
+    <div>
+      <button class="start">録音開始</button>
+      <div class="result"></div>
+    </div>
+</body>
+</html>
