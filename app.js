@@ -1,3 +1,7 @@
+// API立ち上げ
+// ※APIが増えてきたらちゃんとルーティング作る
+require('./api/ConvertVoice')
+
 const http = require('http');
 const fs = require('fs');
 

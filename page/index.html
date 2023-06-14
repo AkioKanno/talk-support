@@ -7,22 +7,46 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script>
     const SpeechRecognition =
-      window.webkitSpeechRecognition || window.SpeechRecognition
+      webkitSpeechRecognition || SpeechRecognition
     const recognition = new SpeechRecognition()
+
     recognition.lang = 'ja-JP'
 
     recognition.onresult = (event) => {
-      const textInfo = event.results[event.results.length - 1][0]
-      const message = textInfo.transcript
+      const textInfo = event.results[event.results.length - 1][0];
+      const message = textInfo.transcript;
+
+/*
+ResponseをJsonで返す場合は有効にする
+      var json_asocc = {'word': message};
+
+      //JSONにエンコード
+      var json_text = JSON.stringify(json_asocc);
+ */
+
+      //データを送信
+      xhr = new XMLHttpRequest;
+      xhr.onload = function(){
+        var res = xhr.responseText;
+        if (res.length>0) alert(res);
+      };
+      xhr.onerror = function(){
+        alert("error!");
+      }
+      xhr.open('post', "http://localhost:3001/api/ConvertVoice", true);
+      //xhr.setRequestHeader('Content-Type', 'application/json;charset=utf8');
+      xhr.setRequestHeader('Content-Type', 'text/plain');
+      xhr.send(message);
+
       $('.result').text(message)
     }
 
     $(function() {
-      $('.start').on('click', () => {
-        console.log('hogehoge')
-        recognition.start()
-      })
+        $('.start').on('click', () => {
+            recognition.start()
+        })
     })
+
   </script>
 </head>
 <body>
@@ -33,3 +57,4 @@
     </div>
 </body>
 </html>
+
