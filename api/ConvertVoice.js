@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require('cors');
-console.log("include ConvertVoice")
 
 const app = express();
 app.use(cors());
