@@ -39,6 +39,11 @@ function RouteSetting(req, res) {
     res.write(fs.readFileSync('./assets/base.css', 'UTF-8'));
     res.end();
     break;
+    case '/assets/img/mic_button.jpg':
+    res.writeHead(200, {'Content-Type': 'image/jpeg'});
+    res.write(fs.readFileSync('./assets/img/mic_button.jpg'));
+    res.end();
+    break;
     // FrontでJSファイルを読み込む場合
     case '/module/xxxx.js':
       res.writeHead(200, {'Content-Type': 'text/plain'});
@@ -47,7 +52,7 @@ function RouteSetting(req, res) {
       break;
     default:
       res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('お探しのページは見つかりません。');
+      res.end('Page Not found');
       break;
   }
 }
