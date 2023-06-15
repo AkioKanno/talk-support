@@ -36,6 +36,7 @@ recognition.onresult = (event) => {
         }
     }
     $('.userQ').text(message)
+    addQuetionUI(message.toString())
 }
 
 $(function() {
@@ -44,3 +45,41 @@ $(function() {
     })
 })
 
+
+function addQuetionUI(sentence) {
+  // 追加元
+  let talkElement = document.getElementById('qaTalk')
+  let br = document.createElement('br')
+
+  // balloon_1生成
+  let balloon = document.createElement('div')
+  balloon.className = "balloon_l"
+  balloon.style = "padding-right:10px"
+
+  // div faceicon
+  let faceiconDiv = document.createElement('div')
+  faceiconDiv.className = "faceicon"
+
+  // image
+  let imageIcon = document.createElement('img')
+  imageIcon.src = "https://stand-4u.com/stand-4u/wp-content/uploads/2019/09/s4man.png"
+  imageIcon.alt = ""
+
+  faceiconDiv.appendChild(imageIcon)
+
+  // div says
+  let saysDiv = document.createElement('div')
+  saysDiv.className = "says"
+
+  // p
+  let pTag = document.createElement('p')
+  pTag.textContent = sentence
+
+  saysDiv.appendChild(pTag)
+
+  balloon.appendChild(faceiconDiv)
+  balloon.appendChild(saysDiv)
+
+  talkElement.appendChild(br)
+  talkElement.appendChild(balloon)
+}
