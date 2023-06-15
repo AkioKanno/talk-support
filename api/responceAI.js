@@ -10,11 +10,16 @@ app.use(express.json())
 app.post("/api/responceAI", function(req, res) {
   res.header('Access-Control-Allow-Methods', 'POST');
 
-  console.log(req.body);
+  // 1. ユーザの質問抽出
+  const question = req.body.value.toString()
+  console.log("User Question : " + question)
 
-  // レスポンスのデータ
+  // 2. 音声変換APIの呼び出し
+
+
+  // 3. レスポンスのデータ
   const responseObjectData =
-    { answer : "AIからの回答をここに入れてFrontに返却する"};
+    { answer : "回答はまだ未実装のため、今は固定値でしゃべっています"};
 
 
   // データの返却
