@@ -4,8 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <link rel="stylesheet" href="assets/chat.css">
+  <link rel="stylesheet" href="assets/base.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script>
+</head>
+
+<body>
+  <div class="bg_pattern Polka_v2"></div>
+
+  <div>
+    <h1>AI音声サポート</h1>
+    <p>録音開始ボタンを押して、質問してみよう</p>
+    <div>
+      <button class="start">録音開始</button>
+    </div>
+  </div>
+
+  <!-- ここから下LINE風チャット ---->
+  <div class="balloon_l">
+    <div class="faceicon">
+      <img src="https://stand-4u.com/stand-4u/wp-content/uploads/2019/09/s4man.png" alt="" >
+    </div>
+    <div class="says">
+      <p class="userQ">ここにユーザの質問が入る！</p>
+    </div>
+  </div>
+
+  <div class="balloon_r">
+    <div class="faceicon">
+      <img src="https://illust8.com/wp-content/uploads/2019/04/eto_monkey_saru_illust_3776.png" alt="" >
+    </div>
+    <div class="says">
+      <p class="aiAnswer">ここにAIの回答が入る！</p>
+    </div>
+  </div>
+</div>
+</body>
+
+<!--- いつか別ファイルに移したいJS ---->
+<script>
     /** SpeechRecognition を使って録音 **/
     const SpeechRecognition =
       webkitSpeechRecognition || SpeechRecognition
@@ -44,7 +81,6 @@
         }
       }
 
-
       $('.userQ').text(message)
     }
 
@@ -53,21 +89,6 @@
             recognition.start()
         })
     })
-
-  </script>
-</head>
-<body>
-    <h1>Hello Wolrd</h1>
-    <div>
-      <button class="start">録音開始</button>
-      <div>
-        <pre>Q. </pre><div class="userQ"></div>
-      </div>
-      </br>
-      <div>
-        <pre>A. <div class="aiAnswer"></div>
-      </div>
-    </div>
-</body>
+</script>
 </html>
 
