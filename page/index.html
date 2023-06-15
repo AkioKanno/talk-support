@@ -27,10 +27,8 @@
         alert("error!");
       }
       xhr.open('post', "http://localhost:3001/api/ConvertVoice", true);
-      // Request Body はJSONが良ければ後で変更する
-      //xhr.setRequestHeader('Content-Type', 'application/json;charset=utf8');
-      xhr.setRequestHeader('Content-Type', 'text/plain');
-      xhr.send(message);
+      xhr.setRequestHeader('Content-Type', 'application/json;charset=utf8');
+      xhr.send(JSON.stringify({"value":message}));
 
       $('.result').text(message)
     }
