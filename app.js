@@ -1,6 +1,6 @@
 // API立ち上げ
 // ※APIが増えてきたらちゃんとルーティング作る
-require('./api/ConvertVoice')
+require('./api/responceAI')
 
 const http = require('http');
 const fs = require('fs');

@@ -6,19 +6,16 @@ const app = express();
 app.use(cors());
 app.use(express.json())
 
-// レスポンスのデータ
-const responseObjectData = {
-  textObject1 : {
-    title: 'Objectのタイトル1です',
-    subTitle: 'Objectのサブタイトル1です',
-    bodyText: 'Objectの本文1です'
-  },
-};
 
-app.post("/api/ConvertVoice", function(req, res) {
+app.post("/api/responceAI", function(req, res) {
   res.header('Access-Control-Allow-Methods', 'POST');
 
   console.log(req.body);
+
+  // レスポンスのデータ
+  const responseObjectData =
+    { answer : "AIからの回答をここに入れてFrontに返却する"};
+
 
   // データの返却
   res.json(responseObjectData);
