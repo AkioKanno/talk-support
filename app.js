@@ -45,9 +45,9 @@ function RouteSetting(req, res) {
     res.end();
     break;
     // FrontでJSファイルを読み込む場合
-    case '/module/xxxx.js':
+    case '/module/speechRec.js':
       res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.write(fs.readFileSync('./module/xxxx.js', 'UTF-8'));
+      res.write(fs.readFileSync('./module/speechRec.js', 'UTF-8'));
       res.end();
       break;
     default:
