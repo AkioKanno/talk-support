@@ -12,4 +12,4 @@ v20.3.0
 
 
 #API 一覧
-* POST http://localhost:3001/api/ConvertVoice
+* POST http://localhost:3001/api/responceAI
