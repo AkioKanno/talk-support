@@ -50,7 +50,7 @@ $(function() {
 
 function addChatUI(sentence, position) {
   const leftImg = "https://stand-4u.com/stand-4u/wp-content/uploads/2019/09/s4man.png"
-  const rightImg = "https://illust8.com/wp-content/uploads/2019/04/eto_monkey_saru_illust_3776.png"
+  const rightImg = "assets/img/babyIcon.png"
 
   // 追加元
   let talkElement = document.getElementById('qaTalk')

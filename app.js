@@ -39,9 +39,14 @@ function RouteSetting(req, res) {
     res.write(fs.readFileSync('./assets/base.css', 'UTF-8'));
     res.end();
     break;
-    case '/assets/img/mic_button.jpg':
-    res.writeHead(200, {'Content-Type': 'image/jpeg'});
-    res.write(fs.readFileSync('./assets/img/mic_button.jpg'));
+    case '/assets/img/mic_button.png':
+    res.writeHead(200, {'Content-Type': 'image/png'});
+    res.write(fs.readFileSync('./assets/img/mic_button.png'));
+    res.end();
+    break;
+    case '/assets/img/babyIcon.png':
+    res.writeHead(200, {'Content-Type': 'image/png'});
+    res.write(fs.readFileSync('./assets/img/babyIcon.png'));
     res.end();
     break;
     // FrontでJSファイルを読み込む場合
