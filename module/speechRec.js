@@ -59,7 +59,6 @@ function addChatUI(sentence, position) {
   // balloon_1生成
   let balloon = document.createElement('div')
   balloon.className = (position == "left")? "balloon_l" : "balloon_r"
-  balloon.style = "padding-right:5px; padding-left:5px"
 
   // div faceicon
   let faceiconDiv = document.createElement('div')
@@ -79,6 +78,9 @@ function addChatUI(sentence, position) {
   // p
   let pTag = document.createElement('p')
   pTag.textContent = sentence
+  if (position == "right") {
+    pTag.style = "font-family:Hannotate SC"
+  }
 
   saysDiv.appendChild(pTag)
 
