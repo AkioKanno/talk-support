@@ -33,10 +33,11 @@ recognition.onresult = (event) => {
             // 発言を再生 (必須)
             window.speechSynthesis.speak(uttr)
             $('.aiAnswer').text(answer)
+            addChatUI(answer, "right")
         }
     }
     $('.userQ').text(message)
-    addQuetionUI(message.toString())
+    addChatUI(message.toString(), "left")
 }
 
 $(function() {
@@ -45,16 +46,18 @@ $(function() {
     })
 })
 
+function addChatUI(sentence, position) {
+  const leftImg = "https://stand-4u.com/stand-4u/wp-content/uploads/2019/09/s4man.png"
+  const rightImg = "https://illust8.com/wp-content/uploads/2019/04/eto_monkey_saru_illust_3776.png"
 
-function addQuetionUI(sentence) {
   // 追加元
   let talkElement = document.getElementById('qaTalk')
-  let br = document.createElement('br')
+
 
   // balloon_1生成
   let balloon = document.createElement('div')
-  balloon.className = "balloon_l"
-  balloon.style = "padding-right:10px"
+  balloon.className = (position == "left")? "balloon_l" : "balloon_r"
+  balloon.style = "padding-right:5px; padding-left:5px"
 
   // div faceicon
   let faceiconDiv = document.createElement('div')
@@ -62,7 +65,7 @@ function addQuetionUI(sentence) {
 
   // image
   let imageIcon = document.createElement('img')
-  imageIcon.src = "https://stand-4u.com/stand-4u/wp-content/uploads/2019/09/s4man.png"
+  imageIcon.src = (position == "left")? leftImg : rightImg;
   imageIcon.alt = ""
 
   faceiconDiv.appendChild(imageIcon)
@@ -80,6 +83,5 @@ function addQuetionUI(sentence) {
   balloon.appendChild(faceiconDiv)
   balloon.appendChild(saysDiv)
 
-  talkElement.appendChild(br)
   talkElement.appendChild(balloon)
 }
