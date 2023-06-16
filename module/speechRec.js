@@ -38,6 +38,8 @@ recognition.onresult = (event) => {
     }
     $('.userQ').text(message)
     addChatUI(message.toString(), "left")
+
+    $('body,html').animate({scrollTop:1000}, 200, 'swing');
 }
 
 $(function() {
