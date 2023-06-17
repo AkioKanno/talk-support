@@ -1,13 +1,14 @@
 // API立ち上げ
-// ※APIが増えてきたらちゃんとルーティング作る
-require('./api/responceAI')
-const url = require('url');
 
+const conf = require('./config.js')
+require('./api/responceAI')
+
+const url = require('url');
 const http = require('http');
 const fs = require('fs');
 
-const hostname = 'localhost';
-const port = 3000;
+const hostname = conf.HOST_NAME
+const port = conf.PORT
 const server = http.createServer(RouteSetting);
 
 server.listen(port, hostname, () => {
@@ -61,8 +62,4 @@ function RouteSetting(req, res) {
       break;
   }
 }
-
-
-
-
 

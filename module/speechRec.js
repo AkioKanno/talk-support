@@ -4,17 +4,42 @@ const SpeechRecognition =
 const recognition = new SpeechRecognition()
 
 recognition.lang = 'ja-JP'
-
 recognition.onresult = (event) => {
+    // 音声を文字化したものの取得
     const textInfo = event.results[event.results.length - 1][0];
-    const message = textInfo.transcript;
+    const quetion = textInfo.transcript;
+    // 画面に質問を反映
+    this.addChatUI(quetion.toString(), "left")
 
-    /** 録音データを api/ConvertVoice へリクエスト **/
+    // OpenAIに質問を投げる
+    this.requestOpenAI(quetion)
+
+    // 一番下までスクロール(固定値：1000px分下にスクロール)
+    // TODO: チャットの長さ分下スクロールするようにいつか頑張る
+    $('body,html').animate({scrollTop:1000}, 200, 'swing');
+}
+
+$(function() {
+    $('.start').on('click', () => {
+        recognition.start()
+    })
+})
+
+/**
+ * OpenAI API に質問をする
+ *
+ * @param quetion : 質問内容
+ */
+function requestOpenAI(quetion) {
+    // TODO：今はServerからOpenAI API叩こうとしているけど、
+　　//       FrontからAPI 叩くように修正予定
+
+
     xhr = new XMLHttpRequest;
     // Request 生成
     xhr.open('post', "http://localhost:3001/api/responceAI", true);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=utf8');
-    xhr.send(JSON.stringify({"value":message}));
+    xhr.send(JSON.stringify({"value":quetion}));
     // Responce の処理
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
@@ -32,49 +57,37 @@ recognition.onresult = (event) => {
             uttr.volume = 1.3
             // 発言を再生 (必須)
             window.speechSynthesis.speak(uttr)
-            $('.aiAnswer').text(answer)
             addChatUI(answer, "right")
         }
     }
-    $('.userQ').text(message)
-    addChatUI(message.toString(), "left")
-
-    $('body,html').animate({scrollTop:1000}, 200, 'swing');
 }
 
-$(function() {
-    $('.start').on('click', () => {
-        recognition.start()
-    })
-})
-
+/**
+ * チャットのUIを画面追加
+ *
+ * @param sentence : チャットで表示したい文言
+ * @param position : チャットの左か右か(ユーザ発言は左、AI発言は右)
+ */
 function addChatUI(sentence, position) {
   const leftImg = "https://stand-4u.com/stand-4u/wp-content/uploads/2019/09/s4man.png"
   const rightImg = "assets/img/babyIcon.png"
 
   // 追加元
   let talkElement = document.getElementById('qaTalk')
-
-
   // balloon_1生成
   let balloon = document.createElement('div')
   balloon.className = (position == "left")? "balloon_l" : "balloon_r"
-
   // div faceicon
   let faceiconDiv = document.createElement('div')
   faceiconDiv.className = "faceicon"
-
   // image
   let imageIcon = document.createElement('img')
   imageIcon.src = (position == "left")? leftImg : rightImg;
   imageIcon.alt = ""
-
   faceiconDiv.appendChild(imageIcon)
-
   // div says
   let saysDiv = document.createElement('div')
   saysDiv.className = "says"
-
   // p
   let pTag = document.createElement('p')
   pTag.textContent = sentence
@@ -83,9 +96,7 @@ function addChatUI(sentence, position) {
   }
 
   saysDiv.appendChild(pTag)
-
   balloon.appendChild(faceiconDiv)
   balloon.appendChild(saysDiv)
-
   talkElement.appendChild(balloon)
 }
