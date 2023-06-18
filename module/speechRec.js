@@ -31,10 +31,6 @@ $(function() {
  * @param quetion : 質問内容
  */
 function requestOpenAI(quetion) {
-    // TODO：今はServerからOpenAI API叩こうとしているけど、
-　　//       FrontからAPI 叩くように修正予定
-
-
     xhr = new XMLHttpRequest;
     // Request 生成
     xhr.open('post', "http://localhost:3001/api/responceAI", true);
@@ -45,7 +41,9 @@ function requestOpenAI(quetion) {
         if(this.readyState == 4 && this.status == 200){
             // 発言を設
             const uttr = new SpeechSynthesisUtterance()
-            var answer = JSON.parse(this.responseText).answer
+            console.log(this.responseText)
+            var answer = JSON.parse(this.responseText)[0].text
+            console.log(answer)
             // Speech Text設定
             uttr.text = answer
             uttr.lang = "ja-JP"
