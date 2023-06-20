@@ -101,7 +101,7 @@ function requestOpenAI(quetion) {
             const uttr = new SpeechSynthesisUtterance()
             console.log(this.responseText)
             var resJson = JSON.parse(this.responseText)
-            var answer = resJson.answer.replace(/^ください/g,"")
+            var answer = resJson.answer.replace(/^ください\n\n/g,"")
             var emotionalValue = resJson.emotionalValue
             console.log(answer)
             // Speech Text設定
