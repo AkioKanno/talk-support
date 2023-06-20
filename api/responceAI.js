@@ -16,9 +16,12 @@ app.post("/api/responceAI", function(req, res) {
   res.header('Access-Control-Allow-Methods', 'POST');
 
   // 1. ユーザの質問抽出
-  const question = req.body.value.toString();
-
+  const reqBodyJson = req.body;
+  console.log("--- API Request Body ---")
+  console.log(reqBodyJson)
+  const question = reqBodyJson.quetion.toString();
   console.log("User Question : " + question);
+
 
   // 2. OpenAI API呼び出し
 (async () => {
@@ -30,8 +33,13 @@ app.post("/api/responceAI", function(req, res) {
     max_tokens: 1024,
     stop: ["###"],
   });
-  console.log(response.data.choices);
-  res.json(response.data.choices);
+  // Frontに返すJSON
+  var resJson = {
+    "answer"         : response.data.choices[0].text,
+    "emotionalValue" : "happy",
+    "secondsTime"    : new Date().getSeconds()
+  }
+  res.json(resJson);
  
 })();
 });

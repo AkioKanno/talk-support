@@ -32,17 +32,27 @@ $(function() {
  */
 function requestOpenAI(quetion) {
     xhr = new XMLHttpRequest;
+    var qCount = Number($("#quetionCount").val())
+    var reqJson = {
+        "quetion"        : quetion,
+        "quetionCount"   : qCount + 1,
+        "emotionalValue" : $("#emotionalValue").val()
+    }
+
+
     // Request 生成
     xhr.open('post', "http://localhost:3001/api/responceAI", true);
     xhr.setRequestHeader('Content-Type', 'application/json;charset=utf8');
-    xhr.send(JSON.stringify({"value":quetion}));
+    xhr.send(JSON.stringify(reqJson));
     // Responce の処理
     xhr.onreadystatechange = function(){
         if(this.readyState == 4 && this.status == 200){
             // 発言を設
             const uttr = new SpeechSynthesisUtterance()
             console.log(this.responseText)
-            var answer = JSON.parse(this.responseText)[0].text
+            var resJson = JSON.parse(this.responseText)
+            var answer = resJson.answer
+            var emotionalValue = resJson.emotionalValue
             console.log(answer)
             // Speech Text設定
             uttr.text = answer
@@ -56,6 +66,10 @@ function requestOpenAI(quetion) {
             // 発言を再生 (必須)
             window.speechSynthesis.speak(uttr)
             addChatUI(answer, "right")
+            // hidden Parameterに設置
+            document.getElementById("emotionalValue").value = resJson.emotionalValue
+            document.getElementById("quetionCount").value = qCount + 1
+            document.getElementById("secondsTime").value = resJson.secondsTime
         }
     }
 }
