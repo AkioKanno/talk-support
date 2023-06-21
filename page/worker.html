@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="assets/chat.css">
+  <link rel="stylesheet" href="assets/base.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="module/speechRec.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <div class="bg_pattern Polka_v2"></div>
+
+  <div class="container" id="chat-area" style="padding-bottom:85px">
+    <div id="header" class="fixed-top" style="height:50px; background-color: #f5af7d;">
+      <div class="d-flex justify-content-center" style="margin-top:15px">
+        <h2 style="font-family:Hannotate SC">Worker画面</h2>
+      </div>
+    </div>
+    <div style="padding-top:55px"></div>
+
+    <!-- ここから下LINE風チャット ---->
+    <div class="balloon_r">
+      <div class="faceicon">
+        <img src="assets/img/babyIcon.png" alt="" >
+      </div>
+      <div class="says">
+        <p style="font-family:Hannotate SC">マイクボタンを押して、ボニに質問してみてね</p>
+      </div>
+    </div>
+    <div id="qaTalk" ></div>
+  </div>
+
+  <input type="hidden" value="happy" id="emotionalValue" />
+  <input type="hidden" value="0" id="quetionCount" />
+  <input type="hidden" value="0" id="secondsTime" />
+
+  <!-- 下部の固定ボタン --->
+  <div id="footer" class="fixed-bottom Polka_v2" style="height:85px; ">
+    <div class="d-flex justify-content-center">
+      <img class="start" width="80px" height="80px" src="assets/img/mic_button.png">
+    </div>
+  </div>
+</body>
+</html>
+
