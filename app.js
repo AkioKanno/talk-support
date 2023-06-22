@@ -62,6 +62,11 @@ function RouteSetting(req, res) {
       res.write(fs.readFileSync('./module/speechRec.js', 'UTF-8'));
       res.end();
       break;
+    case '/module/workerClient.js':
+      res.writeHead(200, {'Content-Type': 'application/json'});
+      res.write(fs.readFileSync('./module/workerClient.js', 'UTF-8'));
+      res.end();
+      break;
     default:
       res.writeHead(200, {'Content-Type': 'text/plain'});
       res.end('Page Not found');

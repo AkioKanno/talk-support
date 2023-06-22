@@ -35,6 +35,19 @@
   line-height:1.5;
 /*   align-items: center; */
 }
+.says2 {
+  max-width:500px; /*最大幅は任意*/
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  padding: 17px 13px 15px 18px;
+  border-radius: 12px;
+  background: #FFD700;/*色は任意*/
+  box-sizing:border-box;
+  margin:0 !important;
+  line-height:1.5;
+/*   align-items: center; */
+}
 .says p{
   margin:8px 0 0 !important; 
 }
@@ -54,4 +67,24 @@
 .balloon_r .says:after {
   right: -26px;
   border-left: 22px solid #99dddd;
+}
+.says2 p{
+  margin:8px 0 0 !important;
+}
+.says2 p:first-child{
+  margin-top:0 !important;
+}
+.says2:after {
+  content: "";
+  position: absolute;
+  border: 10px solid transparent;
+/*   margin-top:-3px;  */
+}
+.balloon_l .says2:after {
+  left: -26px;
+  border-right: 22px solid #FFD700;
+}
+.balloon_r .says2:after {
+  right: -26px;
+  border-left: 22px solid #FFD700;
 }

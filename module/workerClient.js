@@ -10,20 +10,30 @@ recognition.onresult = (event) => {
     // 音声を文字化したものの取得
     const textInfo = event.results[event.results.length - 1][0];
     const text = textInfo.transcript;
-    var quetion = text.toString().replace("LINEも", "LINEMO")
-    var quetion = text.toString().replace("LINE も", "LINEMO")
+    var answer = text.toString().replace("LINEも", "LINEMO")
+    var answer = text.toString().replace("LINE も", "LINEMO")
     // 画面に質問を反映
-    this.addChatUI(quetion.toString(), "left")
+    this.addChatUI(answer.toString(), "right", true)
 
-    socket.emit('shortQuetion', quetion)
-    socket.emit('quetion', quetion)
-    socket.emit('worker', quetion)
+    socket.emit('answer', answer)
+    $('body,html').animate({scrollTop:10000}, 200, 'swing');
 }
 
+// サーバからユーザ質問の受け取り時の処理
+socket.on('quetion', function(msg) {
+    addChatUI(msg, "left")
+    $('body,html').animate({scrollTop:10000}, 200, 'swing');
+})
+
 // サーバからのチャット受け取り時の処理
-socket.on('answer', function(msg) {
+socket.on('aiAnswer', function(msg) {
     addChatUI(msg, "right")
-    speechText(msg)
+    $('body,html').animate({scrollTop:10000}, 200, 'swing');
+})
+
+// AIから人にSwitchを検知
+socket.on('switch', function(msg) {
+    addSwitchMessage(msg)
     $('body,html').animate({scrollTop:10000}, 200, 'swing');
 })
 
@@ -33,13 +43,26 @@ $(function() {
     })
 })
 
+function addSwitchMessage(msg) {
+  // 追加元
+  let qaTalk = document.getElementById('qaTalk')
+  let divTag = document.createElement('div')
+  divTag.classList.add("alert")
+  divTag.classList.add("alert-danger")
+  divTag.role = "alert"
+  divTag.textContent = msg
+
+  qaTalk.appendChild(divTag)
+  
+}
+
 /**
  * チャットのUIを画面追加
  *
  * @param sentence : チャットで表示したい文言
  * @param position : チャットの左か右か(ユーザ発言は左、AI発言は右)
  */
-function addChatUI(sentence, position) {
+function addChatUI(sentence, position, isWorker = false) {
   const leftImg = "https://stand-4u.com/stand-4u/wp-content/uploads/2019/09/s4man.png"
   const rightImg = "assets/img/babyIcon.png"
 
@@ -58,7 +81,7 @@ function addChatUI(sentence, position) {
   faceiconDiv.appendChild(imageIcon)
   // div says
   let saysDiv = document.createElement('div')
-  saysDiv.className = "says"
+  saysDiv.className = (isWorker)? "says2": "says"
   // p
   let pTag = document.createElement('p')
   pTag.textContent = sentence
@@ -70,25 +93,5 @@ function addChatUI(sentence, position) {
   balloon.appendChild(faceiconDiv)
   balloon.appendChild(saysDiv)
   talkElement.appendChild(balloon)
-}
-
-/**
- * テキストの読み上げ
- *
- * @param sentence 読み上げるテキスト
- */
-function speechText(sentence) {
-    const uttr = new SpeechSynthesisUtterance()
-    // Speech Text設定
-    uttr.text = sentence
-    uttr.lang = "ja-JP"
-    // 速度を設定
-    uttr.rate = 0.8
-    // 高さを設定
-    uttr.pitch = 1.1
-    // 音量を設定
-    uttr.volume = 1.3
-    // 発言を再生 (必須)
-    window.speechSynthesis.speak(uttr)
 }
 
