@@ -4,6 +4,7 @@ const fs = require('fs');
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 let quetionCount = 0
+let isAIanswer = true
 let isNagative = false
 
 // app.jsで定義した socketIo を使う
@@ -20,20 +21,33 @@ socketIo.on("connection", (socket) => {
     // ユーザのメインの質問
     socket.on('quetion', (quetion) => {
         ++quetionCount
+        socketIo.emit('quetionCount', quetionCount)
         socketIo.emit('quetion', quetion)
+
+        if (!isAIanswer) {
+            socketIo.emit('switch', "AI 回答 OFF のため、AIに代わり回答してください");
+            return
+        }
 
         // Open AI APIに渡す形に整形
         var mainQuetion = "「" + quetion + "」の回答を200文字以内で答えてください。"
         if (quetionCount <= 2) {
             checkNegative(mainQuetion) } else {
             // 人が代わりに回答するため、何もしない
-            socketIo.emit('switch', "質問頻度が高いため、AIに代わり回答してください");
+            socketIo.emit('switch', "質問頻度が多いため、AIに代わり回答してください");
         }
     })
 
     socket.on('answer', (answer) => {
         socketIo.emit('answer', answer);
         // 将来的にWorkerの回答を溜め込んで学習させる
+    })
+    socket.on('resetCount', (answer) => {
+        quetionCount = 0
+        socketIo.emit('quetionCount', quetionCount)
+    })
+    socket.on('isAIanswer', (answer) => {
+        isAIanswer = (answer == "ON")? true: false
     })
 })
 

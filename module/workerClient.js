@@ -4,7 +4,6 @@ const SpeechRecognition =
 const recognition = new SpeechRecognition()
 
 var socket = io()
-
 recognition.lang = 'ja-JP'
 recognition.onresult = (event) => {
     // 音声を文字化したものの取得
@@ -37,9 +36,31 @@ socket.on('switch', function(msg) {
     $('body,html').animate({scrollTop:10000}, 200, 'swing');
 })
 
+socket.on('quetionCount', function(count) {
+    let pTag = document.getElementById('quetionCount')
+    pTag.textContent = count
+})
+
 $(function() {
     $('.start').on('click', () => {
         recognition.start()
+    })
+})
+
+$(function() {
+    $('#resetCount').on('click', () => {
+        socket.emit('resetCount', 0)
+    })
+})
+
+$(function() {
+    $('#isAIanswer').on('click', () => {
+        let checkElement = document.getElementById('isAIanswer')
+        if (checkElement.checked) {
+            socket.emit('isAIanswer', "ON")
+        } else {
+            socket.emit('isAIanswer', "OFF")
+        }
     })
 })
 
