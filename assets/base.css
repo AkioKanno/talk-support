@@ -13,3 +13,16 @@
   background-size: 40px 40px;
   background-position: 0 0,20px 20px;
 }
+
+.bg_angry {
+  height: 100%;
+  background-color: rgba(255, 0, 0,0.5);
+}
+.bg_normal {
+  height: 100%;
+  background-color: rgba(255, 255, 255,0.4);
+}
+.bg_positive {
+  height: 100%;
+  background-color: rgba(0, 255, 0,0.4);
+}

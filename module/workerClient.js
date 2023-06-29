@@ -34,11 +34,59 @@ socket.on('aiAnswer', function(msg) {
 socket.on('switch', function(msg) {
     addSwitchMessage(msg)
     $('body,html').animate({scrollTop:10000}, 200, 'swing');
+
+    let bgDiv = document.getElementById('mainBG')
+    let currentClass = bgDiv.className
+
+    bgDiv.classList.remove(currentClass)
+    bgDiv.classList.add("bg_angry")
 })
 
 socket.on('quetionCount', function(count) {
     let pTag = document.getElementById('quetionCount')
     pTag.textContent = count
+})
+
+socket.on('emotion', function(emotion) {
+    var styleClass = "bg_normal"
+
+    // image
+    let imageIcon = document.createElement('img')
+
+    switch(emotion) {
+        case '中立':
+            styleClass = "bg_normal"
+            imageIcon.src = "assets/img/normal.png"
+        break;
+        case 'ポジティブ':
+            styleClass = "bg_positive"
+            imageIcon.src = "assets/img/enjoy.png"
+        break;
+        case 'ネガティブ':
+            styleClass = "bg_angry"
+            imageIcon.src = "assets/img/angry.png"
+        break;
+        default:
+            styleClass = "bg_normal"
+            imageIcon.src = "assets/img/normal.png"
+        break;
+    }
+
+    let bgDiv = document.getElementById('mainBG')
+    let currentClass = bgDiv.className
+
+    bgDiv.classList.remove(currentClass)
+    bgDiv.classList.add(styleClass)
+
+    let qaTalk = document.getElementById('qaTalk')
+    // div faceicon
+    let faceiconDiv = document.createElement('div')
+    faceiconDiv.className = "faceicon"
+
+    imageIcon.alt = ""
+    faceiconDiv.appendChild(imageIcon)
+    qaTalk.appendChild(faceiconDiv)
+
 })
 
 $(function() {
@@ -92,7 +140,6 @@ function addSwitchMessage(msg) {
   divTag.textContent = msg
 
   qaTalk.appendChild(divTag)
-  
 }
 
 /**

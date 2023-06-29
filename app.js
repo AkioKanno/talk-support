@@ -61,6 +61,21 @@ function RouteSetting(req, res) {
       res.write(fs.readFileSync('./assets/img/babyIcon.png'));
       res.end();
       break;
+    case '/assets/img/angry.png':
+      res.writeHead(200, {'Content-Type': 'image/png'});
+      res.write(fs.readFileSync('./assets/img/angry.png'));
+      res.end();
+      break;
+    case '/assets/img/enjoy.png':
+      res.writeHead(200, {'Content-Type': 'image/png'});
+      res.write(fs.readFileSync('./assets/img/enjoy.png'));
+      res.end();
+      break;
+    case '/assets/img/normal.png':
+      res.writeHead(200, {'Content-Type': 'image/png'});
+      res.write(fs.readFileSync('./assets/img/normal.png'));
+      res.end();
+      break;
     // FrontでJSファイルを読み込む場合
     case '/module/speechRec.js':
       res.writeHead(200, {'Content-Type': 'application/json'});
