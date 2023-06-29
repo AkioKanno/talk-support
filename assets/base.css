@@ -13,33 +13,3 @@
   background-size: 40px 40px;
   background-position: 0 0,20px 20px;
 }
-.chat-form {
-  display: flex;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 10px;
-  background-color: white;
-  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.3);
-  z-index: 1;
-}
-
-.chat-input {
-  flex: 1;
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  margin-right: 10px;
-  font-size: 16px;
-}
-
-.chat-send {
-  background-color: #2D81D8;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-size: 16px;
-}

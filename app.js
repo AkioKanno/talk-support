@@ -46,6 +46,11 @@ function RouteSetting(req, res) {
       res.write(fs.readFileSync('./assets/base.css', 'UTF-8'));
       res.end();
       break;
+    case '/assets/textForm.css':
+      res.writeHead(200, {'Content-Type': 'text/css'});
+      res.write(fs.readFileSync('./assets/textForm.css', 'UTF-8'));
+      res.end();
+      break;
     case '/assets/img/mic_button.png':
       res.writeHead(200, {'Content-Type': 'image/png'});
       res.write(fs.readFileSync('./assets/img/mic_button.png'));
@@ -65,11 +70,6 @@ function RouteSetting(req, res) {
     case '/module/workerClient.js':
       res.writeHead(200, {'Content-Type': 'application/json'});
       res.write(fs.readFileSync('./module/workerClient.js', 'UTF-8'));
-      res.end();
-      break;
-    case '/module/switchInputForm.js':
-      res.writeHead(200, {'Content-Type': 'application/json'});
-      res.write(fs.readFileSync('./module/switchInputForm.js', 'UTF-8'));
       res.end();
       break;
     default:
