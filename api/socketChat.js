@@ -36,7 +36,7 @@ socketIo.on("connection", (socket) => {
         // Open AI APIに渡す形に整形
         var mainQuetion = "「" + quetion + "」の回答を180文字以内で答えてください。"
         if (quetionCount <= 3) {
-            checkNegative(mainQuetion) } else {
+            checkNegative(quetion) } else {
             // 人が代わりに回答するため、何もしない
             socketIo.emit('switch', "質問頻度が多いため、AIに代わり回答してください");
         }

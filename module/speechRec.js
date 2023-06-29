@@ -33,6 +33,26 @@ $(function() {
     })
 })
 
+/** テキスト入力の送信 **/
+window.onload = function() {
+    const chatForm = document.querySelector('#chat-form');
+    const chatInput = document.querySelector('#chat-input');
+    // Add an event listener to the form
+    chatForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const question = chatInput.value.trim();
+        if (question !== '') {
+            // 画面に質問を反映
+            addChatUI(question.toString(), "left")
+            socket.emit('shortQuetion', question)
+            socket.emit('quetion', question)
+            socket.emit('worker', question)
+            chatInput.value = '';
+        }
+    }, false);
+};
+
+
 /**
  * チャットのUIを画面追加
  *

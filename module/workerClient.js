@@ -112,6 +112,24 @@ $(function() {
     })
 })
 
+/** テキスト入力の送信 **/
+window.onload = function() {
+    const chatForm = document.querySelector('#chat-form');
+    const chatInput = document.querySelector('#chat-input');
+    // Add an event listener to the form
+    chatForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+        const answer = chatInput.value.trim();
+        if (answer !== '') {
+            // 画面に質問を反映
+            addChatUI(answer.toString(), "right", true)
+            socket.emit('answer', answer)
+            $('body,html').animate({scrollTop:10000}, 200, 'swing');
+            chatInput.value = '';
+        }
+    }, false);
+};
+
 function addSwitchMessage(msg) {
   // 追加元
   let qaTalk = document.getElementById('qaTalk')
