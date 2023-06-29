@@ -6,6 +6,7 @@
   <title>Document</title>
   <link rel="stylesheet" href="assets/chat.css">
   <link rel="stylesheet" href="assets/base.css">
+  <link rel="stylesheet" href="assets/textForm.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="module/workerClient.js"></script>
@@ -53,6 +54,13 @@
   <div id="footer" class="fixed-bottom Polka_v2" style="height:85px; ">
     <div class="d-flex justify-content-center">
       <img class="start" width="80px" height="80px" src="assets/img/mic_button.png">
+
+      <form class="chat-form" id="chat-form">
+        <input type="text" class="chat-input" id="chat-input" placeholder="回答を入れてください">
+        <button type="submit" class="chat-send" id="chat-send">
+          送信
+        </button>
+      </form>
     </div>
   </div>
 </body>
