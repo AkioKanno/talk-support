@@ -34,7 +34,7 @@ socketIo.on("connection", (socket) => {
         }
 
         // Open AI APIに渡す形に整形
-        var mainQuetion = "「" + quetion + "」の回答を180文字以内で答えてください。"
+        var mainQuetion = "「" + quetion + "」の回答を200文字以内で答えてください。"
         if (quetionCount <= 3) {
             checkNegative(quetion) } else {
             // 人が代わりに回答するため、何もしない
@@ -56,7 +56,7 @@ socketIo.on("connection", (socket) => {
 })
 
 function checkNegative(quetion) {
-    var emotion = "「" + quetion + "」の文章が「ネガティブ」か「ポジティブ」か「中立」のいずれかで５文字以内で回答して"
+    var emotion = "「" + quetion + "」の文章が「ネガティブ」か「ポジティブ」か「中立」のいずれかで５文字以内で回答してください。"
     xhr = new XMLHttpRequest;
     var reqJson = {"quetion" : emotion}
 
@@ -69,6 +69,9 @@ function checkNegative(quetion) {
         if(this.readyState == 4 && this.status == 200){
             var resJson = JSON.parse(this.responseText)
             var resText = resJson.answer.replace(/^ください。\n\n/g, "")
+            var resText = resText.replace(/^ください\n\n/g, "")
+            var resText = resText.replace(/\n/g, "")
+            var resText = resText.replace(/。/g, "")
             console.log("EMOTION  : " + resText)
             socketIo.emit('emotion', resText);
 
@@ -101,7 +104,7 @@ function requestOpenAI(quetion, isShortQuetion = false) {
             var resJson = JSON.parse(this.responseText)
             // 質問の短縮なら、つなぎの文章を入れて返却する
             var answer = (isShortQuetion)?
-                    "ありがとうございます。" + resJson.answer + " ですね。":resJson.answer
+                    "ご利用ありがとうございます。" + resJson.answer + " に関するお問い合わせですね。":resJson.answer
             // 回答をチャットで返却
             socketIo.emit('answer', answer);
             if (!isShortQuetion) {

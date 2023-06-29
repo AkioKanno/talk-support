@@ -8,7 +8,7 @@ app.use(express.json())
 
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
-  apiKey:"sk-xxxxxxxxxxxxxx",
+  apiKey:"sk-xxxxxxxxxxxxxxxxxxxxxxxxxx",
 });
 const openai = new OpenAIApi(configuration);
 
@@ -29,13 +29,15 @@ app.post("/api/responceAI", function(req, res) {
   var response = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: prompt,
-    temperature: 0.6,
-    max_tokens: 1024,
+    temperature: 0.1,
+    max_tokens: 256,
     stop: ["###"],
   });
+  var resText = response.data.choices[0].text
+  resText = resText.replace(/^ください/g, "")
   // Frontに返すJSON
   var resJson = {
-    "answer"         : response.data.choices[0].text,
+    "answer"         : resText,
     "emotionalValue" : "happy",
     "secondsTime"    : new Date().getSeconds()
   }
