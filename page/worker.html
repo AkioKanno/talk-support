@@ -15,14 +15,14 @@
 </head>
 
 <body>
-  <div class="bg_pattern Polka_v2"></div>
+  <div class="bg_normal" id="mainBG">
 
   <div class="container" id="chat-area" style="padding-bottom:85px">
-    <div id="header" class="fixed-top" style="height:50px; background-color: #f5af7d;">
+    <div id="header" class="fixed-top" style="height:55px; background-color: #f5af7d;">
       <div class="d-flex justify-content-center" style="margin-top:15px">
-        <h2 style="font-family:Hannotate SC">Worker画面</h2>
+        <h2 style="font-family:Hannotate SC">オペレーター画面</h2>
       </div>
-        <div class="d-flex justify-content-right" style="background-color:#ffffff;margin-left:10px">
+        <div class="d-flex justify-content-right" style="background-color:#ffffff;padding-left:10px">
           <p style="font-size:18px;margin-top:10px"> 質問数：</p><p style="font-size:18px;margin-top:10px" id="quetionCount">0</p><p>　　</p>
           <button type="button" id="resetCount" class="btn btn-secondary btn-sm">RESET</button>
           <p style="font-size:18px;margin-top:10px">　　　 AI 回答：OFF/ON　</p>
@@ -50,11 +50,11 @@
   <input type="hidden" value="0" id="secondsTime" />
 
   <!-- 下部の固定ボタン --->
-  <div id="footer" class="fixed-bottom Polka_v2" style="height:85px; ">
+  <div id="footer" class="fixed-bottom" style="height:85px; ">
     <div class="d-flex justify-content-center">
       <img class="start" width="80px" height="80px" src="assets/img/mic_button.png">
     </div>
-  </div>
+  </div></div>
 </body>
 </html>
 
