@@ -26,14 +26,11 @@ app.post("/api/responceAI", function(req, res) {
   // 2. OpenAI API呼び出し
 (async () => {
   var prompt = question;
-  var response = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt: prompt,
-    temperature: 0.1,
-    max_tokens: 256,
-    stop: ["###"],
+  var response = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [{role: "user", content: prompt}],
   });
-  var resText = response.data.choices[0].text
+  var resText = response.data.choices[0].message.content
   resText = resText.replace(/^ください/g, "")
   // Frontに返すJSON
   var resJson = {
