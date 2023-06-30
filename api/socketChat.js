@@ -54,7 +54,8 @@ socketIo.on("connection", (socket) => {
 })
 
 function checkNegative(quetion) {
-    var emotion = "「" + quetion + "」の文章が「ネガティブ」か「ポジティブ」か「中立」のいずれかで５文字以内で回答してください。"
+    // var emotion = "「" + quetion + "」の文章が「ネガティブ」か「ポジティブ」か「中立」のいずれかで５文字以内で回答してください。"
+    var emotion = "「" + quetion + "」の文章が以下の選択からどれに当てはまるか選択してください。\n###条件：\n・「違う」、「そうじゃない」などの言葉は「ネガティブ」に分類してください。\n###選択肢\n・ネガティブ\n・ポジティブ\n・中立\n出力：\n"
     // Open AI APIに渡す形に整形
     var mainQuetion = "「" + quetion + "」の回答を180文字以内で答えてください。"
     xhr = new XMLHttpRequest;
@@ -72,6 +73,8 @@ function checkNegative(quetion) {
             var resText = resText.replace(/^ください\n\n/g, "")
             var resText = resText.replace(/\n/g, "")
             var resText = resText.replace(/。/g, "")
+            var resText = resText.replace(/・/g, "")
+            var resText = resText.includes("中立") ? "中立" : resText.includes("ポジティブ") ? "ポジティブ" : "ネガティブ";
             console.log("EMOTION  : " + resText)
             socketIo.emit('emotion', resText);
 
