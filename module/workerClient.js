@@ -51,24 +51,24 @@ socket.on('emotion', function(emotion) {
     var styleClass = "bg_normal"
 
     // image
-    let imageIcon = document.createElement('img')
+    // let imageIcon = document.createElement('img')
 
     switch(emotion) {
         case '中立':
             styleClass = "bg_normal"
-            imageIcon.src = "assets/img/normal.png"
+            // imageIcon.src = "assets/img/normal.png"
         break;
         case 'ポジティブ':
             styleClass = "bg_positive"
-            imageIcon.src = "assets/img/enjoy.png"
+            // imageIcon.src = "assets/img/enjoy.png"
         break;
         case 'ネガティブ':
             styleClass = "bg_angry"
-            imageIcon.src = "assets/img/angry.png"
+            // imageIcon.src = "assets/img/angry.png"
         break;
         default:
             styleClass = "bg_normal"
-            imageIcon.src = "assets/img/normal.png"
+            // imageIcon.src = "assets/img/normal.png"
         break;
     }
 
@@ -80,12 +80,12 @@ socket.on('emotion', function(emotion) {
 
     let qaTalk = document.getElementById('qaTalk')
     // div faceicon
-    let faceiconDiv = document.createElement('div')
-    faceiconDiv.className = "faceicon"
+    // let faceiconDiv = document.createElement('div')
+    // faceiconDiv.className = "faceicon"
 
-    imageIcon.alt = ""
-    faceiconDiv.appendChild(imageIcon)
-    qaTalk.appendChild(faceiconDiv)
+    // imageIcon.alt = ""
+    // faceiconDiv.appendChild(imageIcon)
+    // qaTalk.appendChild(faceiconDiv)
 
 })
 
