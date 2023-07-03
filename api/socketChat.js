@@ -34,7 +34,7 @@ socketIo.on("connection", (socket) => {
         }
 
         // Open AI APIに渡す形に整形
-        var mainQuetion = "「" + quetion + "」の回答を200文字以内で答えてください。"
+
         if (quetionCount <= 3) {
             checkNegative(quetion) } else {
             // 人が代わりに回答するため、何もしない
@@ -57,6 +57,8 @@ socketIo.on("connection", (socket) => {
 
 function checkNegative(quetion) {
     var emotion = "「" + quetion + "」の文章が「ネガティブ」か「ポジティブ」か「中立」のいずれかで５文字以内で回答してください。"
+        //var mainQuetion = "「" + quetion + "」の回答を200文字以内で答えてください。"
+        var mainQuetion = quetion
     xhr = new XMLHttpRequest;
     var reqJson = {"quetion" : emotion}
 
@@ -78,7 +80,7 @@ function checkNegative(quetion) {
             if (resText == "ネガティブ") {
                 socketIo.emit('switch', "ネガティブな質問が来ました。AIに代わり回答してください");
             } else {
-                requestOpenAI(quetion)
+                requestOpenAI(mainQuetion)
             }
         }
     }

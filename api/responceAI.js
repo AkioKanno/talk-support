@@ -8,7 +8,7 @@ app.use(express.json())
 
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
-  apiKey:"sk-xxxxxxxxxxxxxxxxxxxxxxxxxx",
+  apiKey:"sk-xxxxxxxxxxxxxxxxxxxxxxxxxxx",
 });
 const openai = new OpenAIApi(configuration);
 
@@ -26,6 +26,24 @@ app.post("/api/responceAI", function(req, res) {
   // 2. OpenAI API呼び出し
 (async () => {
   var prompt = question;
+
+/*
+  var response = await openai.createChatCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [
+        {
+            role: "user",
+            content: prompt
+        }
+    ],
+    max_tokens: 256,
+    top_p: 1,
+	frequency_penalty: 1,
+	presence_penalty: 0.6,
+	temperature: 0.1,
+  });
+  var resText = response.data.choices[0].message.content
+*/
   var response = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: prompt,
@@ -36,6 +54,7 @@ app.post("/api/responceAI", function(req, res) {
   var resText = response.data.choices[0].text
   resText = resText.replace(/^ください/g, "")
   resText = resText.replace(/^。/g, "")
+
   // Frontに返すJSON
   var resJson = {
     "answer"         : resText,
