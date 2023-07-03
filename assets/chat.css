@@ -13,6 +13,16 @@
   width: 80px; /*任意のサイズ*/
   height: auto;
 }
+.myfaceicon img{
+  width: 50px; /*任意のサイズ*/
+  height: auto;
+  left: 0px;
+  right: 0;
+}
+.header_text{
+  display: block;
+  margin: auto;
+}
 .balloon_r .faceicon{
   margin-left:25px;
 }
