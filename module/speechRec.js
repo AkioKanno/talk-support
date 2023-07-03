@@ -103,7 +103,7 @@ function speechText(sentence) {
     uttr.text = sentence
     uttr.lang = "ja-JP"
     // 速度を設定
-    uttr.rate = 0.9
+    uttr.rate = 1.0
     // 高さを設定
     uttr.pitch = 1.1
     // 音量を設定

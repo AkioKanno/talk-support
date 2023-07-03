@@ -29,12 +29,13 @@ app.post("/api/responceAI", function(req, res) {
   var response = await openai.createCompletion({
     model: "text-davinci-003",
     prompt: prompt,
-    temperature: 0.1,
+    temperature: 0,
     max_tokens: 256,
     stop: ["###"],
   });
   var resText = response.data.choices[0].text
   resText = resText.replace(/^ください/g, "")
+  resText = resText.replace(/^。/g, "")
   // Frontに返すJSON
   var resJson = {
     "answer"         : resText,
