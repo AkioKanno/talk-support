@@ -58,7 +58,8 @@ function checkNegative(quetion) {
     var emotion = "「" + quetion + "」の文章が「ネガティブ」か「ポジティブ」か「中立」のいずれかで５文字以内で回答してください。"
     // Open AI APIに渡す形に整形
     //var mainQuetion = "「" + quetion + "」の回答を200文字以内で答えてください。"
-    var mainQuetion = quetion
+    // var mainQuetion = quetion
+    var mainQuetion = "「" + quetion + "」の質問に簡潔に答えてください。"
     xhr = new XMLHttpRequest;
     var reqJson = {"quetion" : emotion}
 
