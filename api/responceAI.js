@@ -27,10 +27,11 @@ app.post("/api/responceAI", function(req, res) {
 (async () => {
   var prompt = question;
 
-/*
+
   var response = await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
     messages: [
+        {role: "system", content : "あなたはソフトバンクの格安ブランドであるラインモとワイモバイルのオペレーターです。名前は「モモンキー」と言います。"},
         {
             role: "user",
             content: prompt
@@ -43,15 +44,15 @@ app.post("/api/responceAI", function(req, res) {
 	temperature: 0.1,
   });
   var resText = response.data.choices[0].message.content
-*/
-  var response = await openai.createCompletion({
-    model: "text-davinci-003",
-    prompt: prompt,
-    temperature: 0,
-    max_tokens: 256,
-    stop: ["###"],
-  });
-  var resText = response.data.choices[0].text
+
+  // var response = await openai.createCompletion({
+  //   model: "text-davinci-003",
+  //   prompt: prompt,
+  //   temperature: 0,
+  //   max_tokens: 256,
+  //   stop: ["###"],
+  // });
+  // var resText = response.data.choices[0].text
   resText = resText.replace(/^ください/g, "")
   resText = resText.replace(/^。/g, "")
 
